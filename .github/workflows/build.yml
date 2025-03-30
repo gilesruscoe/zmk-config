@@ -3,17 +3,16 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - board: nice_nano_v2
-            shield: micropad_hw
-            # ADD an explicit artifact-name
-            artifact-name: firmware # You can name this whatever you like
-            cmake-args: ""
+    # NO 'strategy:' block here at all
 
+    # Call the reusable workflow ONCE for your target
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    # ADD secrets: inherit below uses:
-    secrets: inherit
-    # Still NO 'with:' block here
+    secrets: inherit # Keep this, it's good practice
+
+    # Define the specific inputs for THIS build run
+    with:
+      board: nice_nano_v2      # Pass board directly
+      shield: micropad_hw     # Pass shield directly
+      artifact-name: firmware # Optional: Give the output a name
+      # You could add other inputs here if needed later, e.g.:
+      # cmake-args: "-DCONFIG_SOME_FEATURE=y"
