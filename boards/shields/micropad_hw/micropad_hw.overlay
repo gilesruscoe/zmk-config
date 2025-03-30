@@ -19,7 +19,7 @@
         // Pro Micro / Nice!Nano pin numbers (e.g., D2 is 2, D3 is 3, B5 is 9)
         // that you connected your keys to.
         // Use (GPIO_ACTIVE_LOW | GPIO_PULL_UP) if keys connect pin to GND when pressed.
-        gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+        input-gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
               , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
               , <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
               , <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
