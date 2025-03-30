@@ -3,10 +3,12 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    # Call the reusable workflow ONCE for your target
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-
-    # Define ONLY the REQUIRED inputs for THIS build run
+    # Add secrets: inherit
+    secrets: inherit
     with:
-      board: nice_nano_v2
-      shield: micropad_hw
+      # Add explicit quotes to string values
+      board: "nice_nano_v2"
+      shield: "micropad_hw"
+      # Add back artifact-name for completeness
+      artifact-name: "firmware"
