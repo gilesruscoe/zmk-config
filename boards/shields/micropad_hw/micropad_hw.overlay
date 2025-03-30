@@ -3,7 +3,7 @@
  * Assumes direct wiring (no rows/columns)
  */
 
-#include <zephyr/dt-bindings/gpio/gpio.h> // Needed for GPIO_ACTIVE_LOW
+#include <dt-bindings/gpio/gpio.h> // Needed for GPIO_ACTIVE_LOW
 #include <dt-bindings/zmk/matrix_transform.h> // Needed for matrix_transform
 
 / {
@@ -22,30 +22,7 @@
             RC(0,3) &gpio0 P1_11 (GPIO_ACTIVE_LOW)
         >;
     };
-};
-
-// --- If you used a 2x2 Matrix Instead ---
-/*
-/ {
     chosen {
-        zmk,kscan = &kscan0;
-    };
-
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row"; // Or "row2col" depending on your diodes
-
-        // Replace with your actual row pins
-        row-gpios
-            = <&gpio0 P0_XX (GPIO_ACTIVE_HIGH)> // Row 0 pin
-            , <&gpio0 P0_YY (GPIO_ACTIVE_HIGH)> // Row 1 pin
-            ;
-
-        // Replace with your actual column pins
-        col-gpios
-            = <&gpio0 P0_AA (GPIO_PULL_UP | GPIO_ACTIVE_LOW)> // Col 0 pin
-            , <&gpio0 P0_BB (GPIO_PULL_UP | GPIO_ACTIVE_LOW)> // Col 1 pin
-            ;
-    };
+        zmk,kscan = &zmk_matrix_transform; // Point to the matrix_transform node defined above
+      };
 };
-*/
