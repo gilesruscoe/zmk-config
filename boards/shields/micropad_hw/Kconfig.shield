@@ -1,0 +1,2 @@
+config SHIELD_MICROPAD_HW
+    def_bool y
