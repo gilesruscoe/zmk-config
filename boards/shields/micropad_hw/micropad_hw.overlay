@@ -14,7 +14,7 @@
         compatible = "zmk,matrix-transform";
         columns = <4>; // Number of keys
         rows = <1>;    // Treat as single row for direct wiring
-
+        map = <0 1 2 3>;
         gpio-map = <
         RC(0,0) &pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
         RC(0,1) &pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
