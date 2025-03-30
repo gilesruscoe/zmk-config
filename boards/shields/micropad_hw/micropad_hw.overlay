@@ -16,10 +16,10 @@
         rows = <1>;    // Treat as single row for direct wiring
 
         map = <
-            RC(0,0) &gpio0 P0_02 (GPIO_ACTIVE_LOW)
-            RC(0,1) &gpio0 P1_15 (GPIO_ACTIVE_LOW)
-            RC(0,2) &gpio1 P1_13 (GPIO_ACTIVE_LOW)
-            RC(0,3) &gpio0 P1_11 (GPIO_ACTIVE_LOW)
+        RC(0,0) &pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
+        RC(0,1) &pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
+        RC(0,2) &pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
+        RC(0,3) &pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
         >;
     };
     chosen {
