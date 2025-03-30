@@ -3,15 +3,15 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
+    # Define the build matrix
     strategy:
       fail-fast: false
       matrix:
-        # DEFINE YOUR TARGET BOARD/SHIELD HERE:
         include:
           - board: nice_nano_v2
-            shield: micropad_hw # <<< Make sure this is correct
+            shield: micropad_hw # Your specific board and shield
 
+    # Call the reusable workflow. It will automatically use the
+    # board and shield defined in the matrix above.
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      board: ${{ matrix.board }}
-      shield: ${{ matrix.shield }}
+    # REMOVE the entire 'with:' block below this line if it only contained board/shield
