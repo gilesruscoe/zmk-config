@@ -6,23 +6,30 @@
 #include <dt-bindings/gpio/gpio.h> // Needed for GPIO_ACTIVE_LOW
 #include <dt-bindings/zmk/matrix_transform.h> // Needed for matrix_transform
 
-/ {
-    // Define the matrix transform using gpio-map for direct wiring
-    // Each entry maps a key position (index starting from 0) to a GPIO pin.
-    // Replace P0_XX with the ACTUAL pins you used!
-    zmk_matrix_transform: matrix_transform {
-        compatible = "zmk,matrix-transform";
-        columns = <4>; // Number of keys
-        rows = <1>;    // Treat as single row for direct wiring
-        map = <0 1 2 3>;
-        gpio-map = <
-        RC(0,0) &pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
-        RC(0,1) &pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
-        RC(0,2) &pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
-        RC(0,3) &pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
-        >;
-    };
+/ { // Start of root node
+
+    // Define the kscan node for direct GPIO inputs
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct"; // *** CORRECT compatible string ***
+        label = "KSCAN";
+
+        // Define the list of GPIOs connected directly to keys.
+        // The order determines the key index (0, 1, 2, 3 in this case).
+        // IMPORTANT: Replace the pin numbers (2, 3, 4, 5 below) with the actual
+        // Pro Micro / Nice!Nano pin numbers (e.g., D2 is 2, D3 is 3, B5 is 9)
+        // that you connected your keys to.
+        // Use (GPIO_ACTIVE_LOW | GPIO_PULL_UP) if keys connect pin to GND when pressed.
+        gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+              , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+              , <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+              , <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+              ;
+    }; // End of kscan node
+
+    // Define the chosen node.
+    // It tells ZMK to use our kscan0 node for key scanning.
     chosen {
-        zmk,kscan = &zmk_matrix_transform; // Point to the matrix_transform node defined above
-      };
+      zmk,kscan = &kscan0; // Point to the kscan node defined above
+    };
+
 };
