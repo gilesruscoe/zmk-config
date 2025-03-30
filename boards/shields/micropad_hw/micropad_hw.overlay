@@ -10,7 +10,7 @@
     // Define the matrix transform using gpio-map for direct wiring
     // Each entry maps a key position (index starting from 0) to a GPIO pin.
     // Replace P0_XX with the ACTUAL pins you used!
-    zmk,matrix_transform {
+    zmk_matrix_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         columns = <4>; // Number of keys
         rows = <1>;    // Treat as single row for direct wiring
