@@ -1,5 +1,8 @@
-# build.yaml
----
-include:
-  - board: nice_nano_v2
-    shield: micropad_hw
+ board: [ "nice_nano_v2" ]
+ shield: [ "micropad_hw" ]
+ include:
+   - board: nice_nano_v2
+     shield: micropad_hw
+     cmake-args: -DCONFIG_ZMK_STUDIO=y
+     artifact-name: micropad
+ 
