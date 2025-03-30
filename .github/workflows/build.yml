@@ -55,7 +55,7 @@ jobs:
 
       # Archive the build artifact (the UF2 file)
       - name: Archive firmware
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: micropad_firmware-nice_nano_v2 # Customize artifact name if desired
           path: |
