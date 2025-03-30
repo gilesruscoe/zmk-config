@@ -4,7 +4,7 @@
  */
 
 #include <zephyr/dt-bindings/gpio/gpio.h> // Needed for GPIO_ACTIVE_LOW
-#include <zephyr/dt-bindings/zmk/matrix-transform.h> // Needed for matrix_transform
+#include <dt-bindings/zmk/matrix_transform.h> // Needed for matrix_transform
 
 / {
     // Define the matrix transform using gpio-map for direct wiring
