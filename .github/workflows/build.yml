@@ -3,15 +3,14 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    # Define the build matrix
     strategy:
       fail-fast: false
       matrix:
         include:
           - board: nice_nano_v2
-            shield: micropad_hw # Your specific board and shield
+            shield: micropad_hw
+            # ADD THIS LINE: Explicitly add an empty cmake-args
+            cmake-args: ""
 
-    # Call the reusable workflow. It will automatically use the
-    # board and shield defined in the matrix above.
+    # Call the reusable workflow (still no 'with:' block needed here)
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    # REMOVE the entire 'with:' block below this line if it only contained board/shield
