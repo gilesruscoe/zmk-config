@@ -1,0 +1,52 @@
+/*
+ * ZMK Matrix Transform for a 4-key handwired micropad
+ * Assumes direct wiring (no rows/columns)
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h> // Needed for GPIO_ACTIVE_LOW
+#include <zephyr/dt-bindings/zmk/matrix-transform.h> // Needed for matrix_transform
+
+/ {
+    // Define the matrix transform using gpio-map for direct wiring
+    // Each entry maps a key position (index starting from 0) to a GPIO pin.
+    // Replace P0_XX with the ACTUAL pins you used!
+    zmk,matrix_transform {
+        compatible = "zmk,matrix-transform";
+        columns = <4>; // Number of keys
+        rows = <1>;    // Treat as single row for direct wiring
+
+        map = <
+        // Key Index  Controller Pin        Flags (usually low when pressed)
+            RC(0,0) &gpio0 P0_17 (GPIO_ACTIVE_LOW)  // Key 0 -> P0.17
+            RC(0,1) &gpio0 P0_20 (GPIO_ACTIVE_LOW)  // Key 1 -> P0.20
+            RC(0,2) &gpio1 P1_00 (GPIO_ACTIVE_LOW)  // Key 2 -> P1.00
+            RC(0,3) &gpio0 P0_09 (GPIO_ACTIVE_LOW)  // Key 3 -> P0.09
+        >;
+    };
+};
+
+// --- If you used a 2x2 Matrix Instead ---
+/*
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row"; // Or "row2col" depending on your diodes
+
+        // Replace with your actual row pins
+        row-gpios
+            = <&gpio0 P0_XX (GPIO_ACTIVE_HIGH)> // Row 0 pin
+            , <&gpio0 P0_YY (GPIO_ACTIVE_HIGH)> // Row 1 pin
+            ;
+
+        // Replace with your actual column pins
+        col-gpios
+            = <&gpio0 P0_AA (GPIO_PULL_UP | GPIO_ACTIVE_LOW)> // Col 0 pin
+            , <&gpio0 P0_BB (GPIO_PULL_UP | GPIO_ACTIVE_LOW)> // Col 1 pin
+            ;
+    };
+};
+*/
