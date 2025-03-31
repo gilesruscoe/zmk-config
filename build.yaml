@@ -1,5 +1,5 @@
 include:
   - board: nice_nano_v2
     shield: micropad_hw
-    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"macroboards_micropad\"
+    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"micropad\"
     artifact-name: handwired_macroboards_micropad
