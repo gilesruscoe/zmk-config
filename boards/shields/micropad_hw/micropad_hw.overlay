@@ -8,10 +8,18 @@
 
 / { // Start of root node
 
+  chosen {
+		zmk,kscan = &default_kscan;
+		zmk,matrix_transform = &default_transform;
+
+
+
+	};
+
     // Define the kscan node for direct GPIO inputs
-    kscan0: kscan {
+    default_kscan: kscan {
         compatible = "zmk,kscan-gpio-direct"; // *** CORRECT compatible string ***
-        label = "KSCAN";
+        label = "default_kscan";
 
         // Define the list of GPIOs connected directly to keys.
         // The order determines the key index (0, 1, 2, 3 in this case).
@@ -19,17 +27,10 @@
         // Pro Micro / Nice!Nano pin numbers (e.g., D2 is 2, D3 is 3, B5 is 9)
         // that you connected your keys to.
         // Use (GPIO_ACTIVE_LOW | GPIO_PULL_UP) if keys connect pin to GND when pressed.
-        input-gpios = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-              , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-              , <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
-              , <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+        input-gpios = <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+              , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+              , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+              , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
               ;
     }; // End of kscan node
-
-    // Define the chosen node.
-    // It tells ZMK to use our kscan0 node for key scanning.
-    chosen {
-      zmk,kscan = &kscan0; // Point to the kscan node defined above
-    };
-
 };
